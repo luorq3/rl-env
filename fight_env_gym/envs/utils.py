@@ -1,10 +1,9 @@
 import os
 from pathlib import Path
-from typing import List, Optional, Dict, Any
+from typing import List, Dict, Any
 
 from pygame import image as pyg_image
 from pygame import Rect
-from pygame.transform import flip as img_flip
 
 
 _BASE_DIR = Path(os.path.dirname(os.path.realpath(__file__))).parent
@@ -54,3 +53,11 @@ def load_images(convert: bool = True) -> Dict[str, Any]:
         raise FileNotFoundError("Can't find the sprites folder! No such file or"
                                 f"directory: {SPRITES_PATH}") from ex
     return images
+
+def load_image(filename, convert: bool = True) -> Any:
+    try:
+        image = _load_sprite(f"{filename}.png", convert=convert, alpha=True)
+    except FileNotFoundError as ex:
+        raise FileNotFoundError("Can't find the sprites folder! No such file or"
+                                f"directory: {SPRITES_PATH}") from ex
+    return image

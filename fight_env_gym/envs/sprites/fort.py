@@ -1,21 +1,24 @@
+from typing import Tuple
+
 import pygame
-from fight_env_gym.envs.sprites.fort_shell import FortShell
 
-IMAGE_PATH = '../assets/fort.png'
+from fight_env_gym.envs.sprites.base import SpriteBase
+from fight_env_gym.envs.sprites.fort_missile import FortMissile
+from fight_env_gym.envs.utils import *
 
-class Fort(pygame.sprite.Sprite):
-    def __init__(self, bg_size, position):
-        super(Fort, self).__init__()
-        self.bg_size = bg_size
-        self.image = pygame.image.load(IMAGE_PATH)
-        # self.image = pygame.transform.rotate(self.image, 180)
-        self.rect = self.image.get_rect()
-        self.rect = self.image.get_rect()
-        self.rect.x = position[0]
-        self.rect.y = position[1]
-        self.defense = 3
+class Fort(SpriteBase):
 
-    def handle(self, fort_shell_sprites, all_sprites):
-        fort_shell = FortShell(self.bg_size, (self.rect.x, self.rect.y))
-        fort_shell_sprites.add(fort_shell)
-        all_sprites.add(fort_shell)
+    def __init__(self,
+                 image: pygame.Surface,
+                 screen_size: Tuple[int, int],
+                 size: Tuple[int, int],
+                 rect: Tuple[int, int],
+                 speed: int = 10):
+        super(Fort, self).__init__(image, screen_size, size, rect)
+        self.hp = 3
+
+    def fire(self, fort_shell_sprites, all_sprites):
+        shell = FortMissile(load_image("fort_missile"), self.screen_size, (10, 10), (self.rect.x, self.rect.y))
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
