@@ -3,8 +3,6 @@ from typing import Tuple
 
 from fight_env_gym.envs.sprites import Ship
 from fight_env_gym.envs.sprites import Fort
-from fight_env_gym.envs.sprites import ShipMissile
-from fight_env_gym.envs.sprites import FortMissile
 from fight_env_gym.envs.utils import *
 
 
@@ -14,14 +12,8 @@ class GameLogic:
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
 
-        images = load_images()
-        self.ship = images['ship']
-        self.fort = images['fort']
-
-    def _create_sprite(self, sprite_class):
-        # if sprite_class == 'ship':
-        #     ship = Ship()
-        pass
+        self.ship = Ship(screen_size, Rect(0, 0, 10, 10))
+        self.fort = Fort(screen_size, Rect(600, 500, 10, 10))
 
     class Action(IntEnum):
         NOOP, UP, DOWN, LEFT, RIGHT, FIRE = 0, 1, 2, 3, 4, 5
@@ -36,4 +28,6 @@ class GameLogic:
             self.ship.fire()
 
         self.fort.fire()
+
+        return True
 

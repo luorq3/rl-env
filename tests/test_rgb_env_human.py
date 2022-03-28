@@ -45,8 +45,8 @@ def play_with_render(env: gym.Env):
 
             clock.tick(30)
 
+            env.render()
             if done:
-                env.render()
                 time.sleep(0.6)
                 break
 

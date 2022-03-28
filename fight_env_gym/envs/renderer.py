@@ -1,6 +1,7 @@
 from typing import Tuple
 
 import pygame
+from fight_env_gym.envs.utils import *
 
 # Sea blue
 FILL_BACKGROUND_COLOR = (135, 206, 235)
@@ -13,8 +14,8 @@ class FightRenderer:
 
         self.display = None
         self.surface = pygame.Surface(screen_size)
-        # todo load image
-        self.images = None
+
+        self.images = load_images(convert=False)
 
         self.game = None
         self._clock = pygame.time.Clock()
@@ -38,6 +39,15 @@ class FightRenderer:
             self.surface.blit(self.images["background"], (0, 0))
         else:
             self.surface.fill(FILL_BACKGROUND_COLOR)
+
+        self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
+        self.surface.blit(self.images['fort'], self.game.fort.rect[:2])
+
+        for missile in self.game.ship.missile_group:
+            self.surface.blit(self.images['ship_missile'], missile.rect[:2])
+
+        for missile in self.game.fort.fort_group:
+            self.surface.blit(self.images['fort_missile'], missile.rect[:2])
 
     def update_display(self):
         if self.display is None:

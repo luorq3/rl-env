@@ -17,14 +17,14 @@ class Fort(SpriteBase):
         self.hp = hp
         # self.angle = 0
         self.radian = 0
-        self.missile_group = pygame.sprite.Group()
+        self.fort_group = pygame.sprite.Group()
 
     def fire(self):
         missile = FortMissile(
             self.screen_size,
             self.rect,
             self.radian)
-        self.missile_group.add(missile)
+        self.fort_group.add(missile)
 
     def update(self, target_x, target_y, *args: Any, **kwargs: Any) -> None:
         offset_x = self.rect.x - target_x

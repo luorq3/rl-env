@@ -50,6 +50,10 @@ def load_images(convert: bool = True) -> Dict[str, Any]:
     try:
         images["ship"] = _load_sprite("ship.png", convert=convert, alpha=True)
         images["fort"] = _load_sprite("fort.png", convert=convert, alpha=True)
+        images["background"] = None
+        images["ship_missile"] = _load_sprite("ship_missile.png", convert=convert, alpha=True)
+        images["fort_missile"] = _load_sprite("fort_missile.png", convert=convert, alpha=True)
+
     except FileNotFoundError as ex:
         raise FileNotFoundError("Can't find the sprites folder! No such file or"
                                 f"directory: {SPRITES_PATH}") from ex

@@ -38,12 +38,13 @@ class FightEnvRGB(gym.Env):
         reward = 1
 
         done = not alive
-        info = {"score": self._game.score}
+        # info = {"score": self._game.score}
+        info = None
 
         return obs, reward, done, info
 
     def render(self, mode="human") -> Optional[np.ndarray]:
-        if mode not in FightEnvRGB.metadata['render.mode']:
+        if mode not in FightEnvRGB.metadata['render.modes']:
             raise ValueError("Invalid render mode!")
 
         self._renderer.draw_surface()
