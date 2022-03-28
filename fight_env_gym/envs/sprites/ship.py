@@ -13,10 +13,11 @@ class Ship(SpriteBase, Movable):
                  screen_size: Tuple[int, int],
                  size: Tuple[int, int],
                  rect: Tuple[int, int],
-                 speed: int = 10):
+                 speed: int = 10,
+                 hp: int = 3):
         SpriteBase.__init__(self, image, screen_size, size, rect)
         Movable.__init__(self, self, speed)
-        self.hp = 3
+        self.hp = hp
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         pass

@@ -3,18 +3,20 @@ from typing import Tuple
 
 from fight_env_gym.envs.sprites import Ship
 from fight_env_gym.envs.sprites import Fort
-from fight_env_gym.envs.sprites import ShipShell
-from fight_env_gym.envs.sprites import FortShell
+from fight_env_gym.envs.sprites import ShipMissile
+from fight_env_gym.envs.sprites import FortMissile
+from fight_env_gym.envs.utils import *
 
 
-class FightLogic:
+class GameLogic:
 
     def __init__(self, screen_size: Tuple[int, int]):
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
 
-        self.play_x = None
-        self.play_y = None
+        images = load_images()
+        self.ship = images['ship']
+        self.fort = images['fort']
 
     def _create_sprite(self, sprite_class):
         # if sprite_class == 'ship':

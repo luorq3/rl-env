@@ -5,7 +5,7 @@ import numpy as np
 import pygame
 from gym.core import ObsType, ActType
 from fight_env_gym.envs.renderer import FightRenderer
-from fight_env_gym.envs.game_logic import FightLogic
+from fight_env_gym.envs.game_logic import GameLogic
 
 
 class FightEnvRGB(gym.Env):
@@ -27,7 +27,7 @@ class FightEnvRGB(gym.Env):
         return pygame.surfarray.array3d(self._renderer.surface)
 
     def reset(self, *, seed: Optional[int] = None, return_info: bool = False, options: Optional[dict] = None):
-        self._game = FightLogic(screen_size=self._screen_size)
+        self._game = GameLogic(screen_size=self._screen_size)
         self._renderer.game = self._game
         return self._get_observation()
 

@@ -13,9 +13,10 @@ class Fort(SpriteBase):
                  screen_size: Tuple[int, int],
                  size: Tuple[int, int],
                  rect: Tuple[int, int],
-                 speed: int = 10):
+                 speed: int = 10,
+                 hp: int = 3):
         super(Fort, self).__init__(image, screen_size, size, rect)
-        self.hp = 3
+        self.hp = hp
 
     def fire(self, fort_shell_sprites, all_sprites):
         shell = FortMissile(load_image("fort_missile"), self.screen_size, (10, 10), (self.rect.x, self.rect.y))
