@@ -30,5 +30,10 @@ class GameLogic:
         pass
 
     def update_state(self, action: int):
-        pass
+        if action in [1, 2, 3, 4]:
+            self.ship.move(action)
+        if action == 5:
+            self.ship.fire()
+
+        self.fort.fire()
 

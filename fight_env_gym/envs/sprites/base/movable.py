@@ -11,7 +11,7 @@ class Movable:
         super(Movable, self).__init__()
         self.rect = sprite.image.get_rect()
         self.speed = speed
-        self.max_rect = [rect - size for size, rect in zip(sprite.size, sprite.screen_size)]
+        self.max_rect = sprite.max_rect
 
     class Direction(IntEnum):
         UP, DOWN, LEFT, RIGHT = 1, 2, 3, 4
