@@ -9,7 +9,7 @@ class Movable:
                  sprite: SpriteBase,
                  speed: int):
         super(Movable, self).__init__()
-        self.rect = sprite.image.get_rect()
+        self.rect = sprite.rect
         self.speed = speed
         self.max_rect = sprite.max_rect
 

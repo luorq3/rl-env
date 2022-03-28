@@ -1,18 +1,16 @@
 from typing import Tuple, Any
 
-import pygame
+from pygame.rect import Rect
 from fight_env_gym.envs.sprites.base import SpriteBase
 
 
 class Missile(SpriteBase):
 
     def __init__(self,
-                 image: pygame.Surface,
-                 bg_size: Tuple[int, int],
-                 size: Tuple[int, int],
-                 rect: Tuple[int, int],
+                 screen_size: Tuple[int, int],
+                 rect: Rect,
                  speed: int = 10):
-        super(Missile, self).__init__(image, bg_size, size, rect)
+        super(Missile, self).__init__(screen_size, rect)
         self.speed = speed
 
     def update(self, *args: Any, **kwargs: Any) -> None:

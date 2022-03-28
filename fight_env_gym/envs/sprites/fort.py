@@ -10,12 +10,10 @@ from fight_env_gym.envs.utils import *
 class Fort(SpriteBase):
 
     def __init__(self,
-                 image: pygame.Surface,
                  screen_size: Tuple[int, int],
-                 size: Tuple[int, int],
-                 rect: Tuple[int, int],
+                 rect: Rect,
                  hp: int = 3):
-        super(Fort, self).__init__(image, screen_size, size, rect)
+        super(Fort, self).__init__(screen_size, rect)
         self.hp = hp
         # self.angle = 0
         self.radian = 0
@@ -23,9 +21,8 @@ class Fort(SpriteBase):
 
     def fire(self):
         missile = FortMissile(
-            load_image("fort_missile"),
-            self.screen_size, (10, 10),
-            (self.rect.x, self.rect.y),
+            self.screen_size,
+            self.rect,
             self.radian)
         self.missile_group.add(missile)
 

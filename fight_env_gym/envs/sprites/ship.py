@@ -9,13 +9,11 @@ import pygame
 class Ship(SpriteBase, Movable):
 
     def __init__(self,
-                 image: pygame.Surface,
                  screen_size: Tuple[int, int],
-                 size: Tuple[int, int],
-                 rect: Tuple[int, int],
+                 rect: Rect,
                  speed: int = 10,
                  hp: int = 3):
-        SpriteBase.__init__(self, image, screen_size, size, rect)
+        SpriteBase.__init__(self, screen_size, rect)
         Movable.__init__(self, self, speed)
         self.hp = hp
         self.missile_group = pygame.sprite.Group()
@@ -24,7 +22,7 @@ class Ship(SpriteBase, Movable):
         pass
 
     def fire(self):
-        missile = ShipMissile(load_image("ship_missile"), self.screen_size, (10, 10), (self.rect.x, self.rect.y))
+        missile = ShipMissile(self.screen_size, self.rect)
         self.missile_group.add(missile)
 
 
