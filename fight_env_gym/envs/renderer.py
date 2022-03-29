@@ -41,7 +41,7 @@ class FightRenderer:
             self.surface.fill(FILL_BACKGROUND_COLOR)
 
         self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
-        self.surface.blit(self.images['fort'], self.game.fort.rect[:2])
+        self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle - 90), self.game.fort.rect[:2])
 
         self.game.ship.missile_group.update()
         self.game.fort.fort_group.update()
@@ -50,7 +50,7 @@ class FightRenderer:
             self.surface.blit(self.images['ship_missile'], missile.rect[:2])
 
         for missile in self.game.fort.fort_group:
-            self.surface.blit(self.images['fort_missile'], missile.rect[:2])
+            self.surface.blit(pygame.transform.rotate(self.images['fort_missile'], self.game.fort.angle - 90), missile.rect[:2])
 
     def update_display(self):
         if self.display is None:
