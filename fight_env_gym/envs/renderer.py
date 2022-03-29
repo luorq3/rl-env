@@ -43,6 +43,9 @@ class FightRenderer:
         self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
         self.surface.blit(self.images['fort'], self.game.fort.rect[:2])
 
+        self.game.ship.missile_group.update()
+        self.game.fort.fort_group.update()
+
         for missile in self.game.ship.missile_group:
             self.surface.blit(self.images['ship_missile'], missile.rect[:2])
 

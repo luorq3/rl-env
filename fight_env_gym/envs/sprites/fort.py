@@ -7,6 +7,7 @@ from fight_env_gym.envs.sprites.base import SpriteBase
 from fight_env_gym.envs.sprites.fort_missile import FortMissile
 from fight_env_gym.envs.utils import *
 
+
 class Fort(SpriteBase):
 
     def __init__(self,
@@ -16,13 +17,13 @@ class Fort(SpriteBase):
         super(Fort, self).__init__(screen_size, rect)
         self.hp = hp
         # self.angle = 0
-        self.radian = 0
+        self.radian = math.pi / 2
         self.fort_group = pygame.sprite.Group()
 
     def fire(self):
         missile = FortMissile(
             self.screen_size,
-            self.rect,
+            self.rect.copy(),
             self.radian)
         self.fort_group.add(missile)
 

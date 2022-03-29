@@ -36,19 +36,19 @@ def play_with_render(env: gym.Env):
                 elif event.key == pygame.K_a or event.key == pygame.K_SPACE:
                     action = 5
 
-            # Processing
-            obs, reward, done, info = env.step(action)
+        # Processing
+        obs, reward, done, info = env.step(action)
 
-            score += reward
-            print(f"Obs shape: {obs.shape}")
-            print(f"Score: {score}\n")
+        score += reward
+        print(f"Obs shape: {obs.shape}")
+        print(f"Score: {score}\n")
 
-            clock.tick(30)
+        clock.tick(30)
 
+        if done:
             env.render()
-            if done:
-                time.sleep(0.6)
-                break
+            time.sleep(0.6)
+            break
 
 
 if __name__ == "__main__":

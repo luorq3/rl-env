@@ -13,7 +13,7 @@ class GameLogic:
         self._screen_height = screen_size[1]
 
         self.ship = Ship(screen_size, Rect(0, 0, 10, 10))
-        self.fort = Fort(screen_size, Rect(600, 500, 10, 10))
+        self.fort = Fort(screen_size, Rect(500, 400, 10, 10))
 
     class Action(IntEnum):
         NOOP, UP, DOWN, LEFT, RIGHT, FIRE = 0, 1, 2, 3, 4, 5
