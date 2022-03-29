@@ -30,6 +30,9 @@ class Fort(SpriteBase):
     def update(self, target_x, target_y, *args: Any, **kwargs: Any) -> None:
         offset_x = self.rect.x - target_x
         offset_y = self.rect.y - target_y
-        self.radian = math.atan(offset_y / offset_x)
+        if offset_y != 0:
+            self.radian = math.atan(offset_x / offset_y)
+        else:
+            self.radian = math.pi / 2
         # self.angle = self.radian * 180 / math.pi
 

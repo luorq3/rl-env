@@ -27,6 +27,7 @@ class GameLogic:
         if action == 5:
             self.ship.fire()
 
+        self.fort.update(*self.ship.rect[:2])
         self.fort.fire()
 
         return True
