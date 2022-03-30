@@ -15,6 +15,9 @@ class GameLogic:
         self.ship = Ship(screen_size, Rect(0, 0, 10, 10))
         self.fort = Fort(screen_size, Rect(500, 400, 10, 10))
 
+        self.fort_fire_speed = 30  # The value is inversely proportional to the fire speed
+        self.fort_fire_clock = 0
+
     class Action(IntEnum):
         NOOP, UP, DOWN, LEFT, RIGHT, FIRE = 0, 1, 2, 3, 4, 5
 
@@ -27,8 +30,12 @@ class GameLogic:
         if action == 5:
             self.ship.fire()
 
-        self.fort.update(*self.ship.rect[:2])
-        self.fort.fire()
+        if self.fort_fire_clock % self.fort_fire_speed == 0:
+            self.fort.update(*self.ship.rect[:2])
+            self.fort.fire()
+            self.fort_fire_clock = 0
+
+        self.fort_fire_clock += 1
 
         return True
 

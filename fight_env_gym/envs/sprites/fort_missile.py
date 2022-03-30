@@ -12,7 +12,7 @@ class FortMissile(Missile):
                  screen_size: Tuple[int, int],
                  rect: Rect,
                  radian: float,
-                 speed: int = 10):
+                 speed: int = 1):
         super(FortMissile, self).__init__(screen_size, rect, speed)
         self.radian = radian
         self.distance = 0
