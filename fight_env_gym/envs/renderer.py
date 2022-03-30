@@ -1,21 +1,20 @@
 from typing import Tuple
 
 import pygame
-from fight_env_gym.envs.utils import *
 
 # Sea blue
 FILL_BACKGROUND_COLOR = (135, 206, 235)
 
 class FightRenderer:
 
-    def __init__(self, screen_size: Tuple[int, int] = (700, 512)):
+    def __init__(self, images, screen_size: Tuple[int, int] = (700, 512)):
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
 
         self.display = None
         self.surface = pygame.Surface(screen_size)
 
-        self.images = load_images(convert=False)
+        self.images = images
 
         self.game = None
         self._clock = pygame.time.Clock()
@@ -44,12 +43,12 @@ class FightRenderer:
         self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle - 90), self.game.fort.rect[:2])
 
         self.game.ship.missile_group.update()
-        self.game.fort.fort_group.update()
+        self.game.fort.missile_group.update()
 
         for missile in self.game.ship.missile_group:
             self.surface.blit(self.images['ship_missile'], missile.rect[:2])
 
-        for missile in self.game.fort.fort_group:
+        for missile in self.game.fort.missile_group:
             self.surface.blit(pygame.transform.rotate(self.images['fort_missile'], self.game.fort.angle - 90), missile.rect[:2])
 
     def update_display(self):

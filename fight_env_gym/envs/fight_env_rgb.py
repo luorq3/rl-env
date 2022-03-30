@@ -7,6 +7,8 @@ from gym.core import ObsType, ActType
 from fight_env_gym.envs.renderer import FightRenderer
 from fight_env_gym.envs.game_logic import GameLogic
 
+from fight_env_gym.envs.utils import load_images
+
 
 class FightEnvRGB(gym.Env):
 
@@ -18,28 +20,27 @@ class FightEnvRGB(gym.Env):
         self.action_space = gym.spaces.Discrete(6)
         self.observation_space = gym.spaces.Box(0, 255, [*screen_size, 3])
 
+        self.images = load_images()
+
         self._screen_size = screen_size
         self._game = None
-        self._renderer = FightRenderer(screen_size=self._screen_size)
+        self._renderer = FightRenderer(self.images, screen_size=self._screen_size)
 
     def _get_observation(self):
         self._renderer.draw_surface()
         return pygame.surfarray.array3d(self._renderer.surface)
 
     def reset(self, *, seed: Optional[int] = None, return_info: bool = False, options: Optional[dict] = None):
-        self._game = GameLogic(screen_size=self._screen_size)
+        self._game = GameLogic(self.images, screen_size=self._screen_size)
         self._renderer.game = self._game
         return self._get_observation()
 
     def step(self, action: ActType) -> Tuple[ObsType, float, bool, dict]:
-        alive = self._game.update_state(action)
+        reward, alive = self._game.update_state(action)
         obs = self._get_observation()
 
-        reward = 1
-
         done = not alive
-        # info = {"score": self._game.score}
-        info = None
+        info = {"reward": reward}
 
         return obs, reward, done, info
 
@@ -62,4 +63,3 @@ class FightEnvRGB(gym.Env):
             self._renderer = None
 
         super().close()
-        
