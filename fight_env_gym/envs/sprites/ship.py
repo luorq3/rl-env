@@ -12,7 +12,7 @@ class Ship(SpriteBase, Movable):
                  screen_size: Tuple[int, int],
                  rect: Rect,
                  speed: int = 10,
-                 hp: int = 3):
+                 hp: int = 5):
         SpriteBase.__init__(self, screen_size, rect)
         Movable.__init__(self, self, speed)
         self.hp = hp

@@ -20,7 +20,7 @@ class FightEnvRGB(gym.Env):
         self.action_space = gym.spaces.Discrete(6)
         self.observation_space = gym.spaces.Box(0, 255, [*screen_size, 3])
 
-        self.images = load_images()
+        self.images = load_images(convert=False)
 
         self._screen_size = screen_size
         self._game = None

@@ -11,6 +11,15 @@ _BASE_DIR = Path(os.path.dirname(os.path.realpath(__file__))).parent
 SPRITES_PATH = str(_BASE_DIR / 'assets')
 
 
+def pixel_collision2(rect1: Rect,
+                     rect2: Rect):
+    rect = rect1.clip(rect2)
+    if rect.width == 0 or rect.height == 0:
+        return False
+
+    return True
+
+
 def pixel_collision(rect1: Rect,
                     rect2: Rect,
                     hitmask1: List[List[bool]],
@@ -24,7 +33,7 @@ def pixel_collision(rect1: Rect,
 
     for x in range(rect.width):
         for y in range(rect.height):
-            if hitmask1[x1+x][y1+y] and hitmask2[x2+x][y2+y]:
+            if hitmask1[x1 + x][y1 + y] and hitmask2[x2 + x][y2 + y]:
                 return True
     return False
 
@@ -41,7 +50,7 @@ def _load_sprite(filename, convert, alpha=True):
     img = pyg_image.load(f"{SPRITES_PATH}/{filename}")
     return (img.convert_alpha() if convert and alpha
             else img.convert() if convert
-            else img)
+    else img)
 
 
 def load_images(convert: bool = True) -> Dict[str, Any]:
