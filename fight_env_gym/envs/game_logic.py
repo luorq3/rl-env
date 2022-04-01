@@ -47,11 +47,14 @@ class GameLogic:
     def update_state(self, action: int):
         alive = True
         reward = 0
+        reward_list = []
+        print(f"update_state start, reward:{reward}")
 
         if action in [1, 2, 3, 4]:
             self.ship.move(action)
         if action == 5:
             reward += self.Reward.FIRE
+            reward_list.append(self.Reward.FIRE)
             self.ship.fire()
 
         # machine fort fire logic
@@ -71,9 +74,12 @@ class GameLogic:
                 missile.kill()
                 self.fort.hp -= 1
                 reward += self.Reward.HIT
+                reward_list.append(self.Reward.HIT)
             if self.fort.hp == 0:
                 alive = False
+                reward_list.append(self.Reward.VICTORY)
                 reward += self.Reward.VICTORY
+                break  # When victory, jump out of the loops to avoid calculating the wrong reward
         # Was Ship be hit
         for missile in self.fort.missile_group:
             # collided = pixel_collision(self.ship.rect, missile.rect, self.ship_mask, self.fort_missile_mask)
@@ -82,9 +88,15 @@ class GameLogic:
                 missile.kill()
                 self.ship.hp -= 1
                 reward += self.Reward.BE_HIT
+                reward_list.append(self.Reward.BE_HIT)
             if self.ship.hp == 0:
                 alive = False
                 reward += self.Reward.DEFEATED
+                reward_list.append(self.Reward.DEFEATED)
+                break  # When failed, jump out of the loops to avoid calculating the wrong reward
+
+        print(f"update_state end, reward:{reward}")
+        print(f"reward list:{reward_list}")
 
         return reward, alive
 

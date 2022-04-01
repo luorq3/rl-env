@@ -40,7 +40,7 @@ def play_with_render(env: gym.Env):
         obs, reward, done, info = env.step(action)
 
         score += reward
-        print(f"Obs shape: {obs.shape}")
+        # print(f"Obs shape: {obs.shape}")
         print(f"Score: {score}\n")
 
         clock.tick(30)
