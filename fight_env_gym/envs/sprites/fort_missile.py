@@ -23,9 +23,9 @@ class FortMissile(Missile):
         offset_x = self.distance * math.sin(self.radian)
         offset_y = self.distance * math.cos(self.radian)
 
-        if 0 < self.start_rect.x - offset_x < self.max_rect[0] \
-                and 0 < self.start_rect.y - offset_y < self.max_rect[1]:
-            self.rect.x = self.start_rect.x - offset_x
-            self.rect.y = self.start_rect.y - offset_y
+        if 0 < self.start_rect.x + offset_x < self.max_rect[0] \
+                and 0 < self.start_rect.y + offset_y < self.max_rect[1]:
+            self.rect.x = self.start_rect.x + offset_x
+            self.rect.y = self.start_rect.y + offset_y
         else:
             self.kill()

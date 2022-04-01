@@ -14,5 +14,5 @@ class ShipMissile(Missile):
 
     def update(self):
         self.rect.y -= self.speed
-        if self.rect.y < self.screen_size[0]:
+        if self.rect.y < 0:
             self.kill()

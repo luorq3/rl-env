@@ -42,10 +42,8 @@ class FightRenderer:
             self.surface.fill(FILL_BACKGROUND_COLOR)
 
         self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
-        pygame.draw.rect(self.images['ship'], (255, 0, 0), self.game.ship.rect.copy())
         self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle - 90),
                           self.game.fort.rect[:2])
-        pygame.draw.rect(self.images['fort'], (255, 0, 0), self.game.fort.rect.copy())
 
         self.game.ship.missile_group.update()
         self.game.fort.missile_group.update()
