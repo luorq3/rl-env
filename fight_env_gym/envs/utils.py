@@ -8,7 +8,7 @@ from pygame import Rect
 
 _BASE_DIR = Path(os.path.dirname(os.path.realpath(__file__))).parent
 
-SPRITES_PATH = str(_BASE_DIR / 'assets')
+SPRITES_PATH = str(_BASE_DIR / 'assets/images')
 
 
 def pixel_collision2(rect1: Rect,
