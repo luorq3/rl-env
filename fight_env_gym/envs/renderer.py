@@ -7,7 +7,7 @@ FILL_BACKGROUND_COLOR = (135, 206, 235)
 
 class FightRenderer:
 
-    def __init__(self, images, screen_size: Tuple[int, int] = (700, 512)):
+    def __init__(self, images, screen_size: Tuple[int, int]):
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
 
@@ -40,7 +40,9 @@ class FightRenderer:
             self.surface.fill(FILL_BACKGROUND_COLOR)
 
         self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
+        pygame.draw.rect(self.images['ship'], (255, 0, 0), self.game.ship.rect.copy())
         self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle - 90), self.game.fort.rect[:2])
+        pygame.draw.rect(self.images['fort'], (255, 0, 0), self.game.fort.rect.copy())
 
         self.game.ship.missile_group.update()
         self.game.fort.missile_group.update()

@@ -9,7 +9,7 @@ class Missile(SpriteBase):
     def __init__(self,
                  screen_size: Tuple[int, int],
                  rect: Rect,
-                 speed: int = 10):
+                 speed: int = 5):
         super(Missile, self).__init__(screen_size, rect)
         self.speed = speed
 

@@ -15,7 +15,7 @@ class FightEnvRGB(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
     def __init__(self,
-                 screen_size: Tuple[int, int] = (700, 512)):
+                 screen_size: Tuple[int, int] = (896, 896)):
         super(FightEnvRGB, self).__init__()
         self.action_space = gym.spaces.Discrete(6)
         self.observation_space = gym.spaces.Box(0, 255, [*screen_size, 3])
