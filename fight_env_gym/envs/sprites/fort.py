@@ -27,6 +27,7 @@ class Fort(SpriteBase):
             self.radian)
         self.missile_group.add(missile)
 
+    # TODO: angle over 90 degree and less than -90
     def update(self, target_x, target_y, *args: Any, **kwargs: Any) -> None:
         offset_x = self.rect.x - target_x
         offset_y = self.rect.y - target_y

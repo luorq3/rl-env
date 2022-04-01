@@ -6,16 +6,19 @@ from fight_env_gym.envs.sprites import Fort
 from fight_env_gym.envs.utils import *
 
 
+ship_size = (40, 99)
+fort_size = (20, 20)
+
 class GameLogic:
 
     def __init__(self, images, screen_size: Tuple[int, int]):
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
 
-        self.ship = Ship(screen_size, Rect(0, 0, 30, 30))
-        self.fort = Fort(screen_size, Rect(500, 400, 30, 30))
+        self.ship = Ship(screen_size, Rect(*self._ship_init_position(), *ship_size))
+        self.fort = Fort(screen_size, Rect(*self._fort_init_position(), *fort_size))
 
-        self.fort_fire_speed = 30  # The value is inversely proportional to the fire speed
+        self.fort_fire_speed = 30  # TODO: The value is inversely proportional to the fire_speed, to be perfected
         self.fort_fire_clock = 0
 
         # hit mask
@@ -29,6 +32,20 @@ class GameLogic:
 
     class Reward(IntEnum):
         FIRE, HIT, BE_HIT, DESTROY, BE_DESTROY, VICTORY, DEFEATED = -1, 2, -2, 3, -3, 4, -4
+
+    def _ship_init_position(self, nums=1):
+        if nums == 1:
+            return self._screen_width // 2, self._screen_height
+        else:
+            # TODO: multi ship position initialization
+            return 0, 0
+
+    def _fort_init_position(self, nums=1):
+        if nums == 1:
+            return self._screen_width // 2, 0
+        else:
+            # TODO: multi ship position initialization
+            return 0, 0
 
     def update_state(self, action: int):
         alive = True

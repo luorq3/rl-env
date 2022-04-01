@@ -13,6 +13,6 @@ class ShipMissile(Missile):
         super(ShipMissile, self).__init__(screen_size, rect, speed)
 
     def update(self):
-        self.rect.x += self.speed
-        if self.rect.x > self.screen_size[0]:
+        self.rect.y -= self.speed
+        if self.rect.y < self.screen_size[0]:
             self.kill()
