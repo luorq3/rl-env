@@ -10,6 +10,11 @@ _BASE_DIR = Path(os.path.dirname(os.path.realpath(__file__))).parent
 
 SPRITES_PATH = str(_BASE_DIR / 'assets/images')
 
+ship_size = (40, 99)
+fort_size = (20, 20)
+ship_missile_size = (5, 8)
+fort_missile_size = (5, 8)
+
 
 def pixel_collision2(rect1: Rect,
                      rect2: Rect):

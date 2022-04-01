@@ -23,7 +23,7 @@ class Fort(SpriteBase):
     def fire(self):
         missile = FortMissile(
             self.screen_size,
-            self.rect.copy(),
+            Rect(self.rect.x, self.rect.y, *fort_missile_size),
             self.radian)
         self.missile_group.add(missile)
 

@@ -22,7 +22,7 @@ class Ship(SpriteBase, Movable):
         pass
 
     def fire(self):
-        missile = ShipMissile(self.screen_size, self.rect.copy())
+        missile = ShipMissile(self.screen_size, Rect(self.rect.x, self.rect.y, *ship_missile_size))
         self.missile_group.add(missile)
 
 

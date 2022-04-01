@@ -6,9 +6,6 @@ from fight_env_gym.envs.sprites import Fort
 from fight_env_gym.envs.utils import *
 
 
-ship_size = (40, 99)
-fort_size = (20, 20)
-
 class GameLogic:
 
     def __init__(self, images, screen_size: Tuple[int, int]):
@@ -35,14 +32,14 @@ class GameLogic:
 
     def _ship_init_position(self, nums=1):
         if nums == 1:
-            return self._screen_width // 2, self._screen_height
+            return self._screen_width // 2, self._screen_height - 100
         else:
             # TODO: multi ship position initialization
             return 0, 0
 
     def _fort_init_position(self, nums=1):
         if nums == 1:
-            return self._screen_width // 2, 0
+            return self._screen_width // 2, 100
         else:
             # TODO: multi ship position initialization
             return 0, 0

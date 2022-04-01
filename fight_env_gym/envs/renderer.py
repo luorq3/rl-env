@@ -3,7 +3,9 @@ from typing import Tuple
 import pygame
 
 # Sea blue
-FILL_BACKGROUND_COLOR = (135, 206, 235)
+# FILL_BACKGROUND_COLOR = (135, 206, 235)
+FILL_BACKGROUND_COLOR = (0, 0, 0)
+
 
 class FightRenderer:
 
@@ -41,7 +43,8 @@ class FightRenderer:
 
         self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
         pygame.draw.rect(self.images['ship'], (255, 0, 0), self.game.ship.rect.copy())
-        self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle - 90), self.game.fort.rect[:2])
+        self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle - 90),
+                          self.game.fort.rect[:2])
         pygame.draw.rect(self.images['fort'], (255, 0, 0), self.game.fort.rect.copy())
 
         self.game.ship.missile_group.update()
@@ -51,7 +54,8 @@ class FightRenderer:
             self.surface.blit(self.images['ship_missile'], missile.rect[:2])
 
         for missile in self.game.fort.missile_group:
-            self.surface.blit(pygame.transform.rotate(self.images['fort_missile'], self.game.fort.angle - 90), missile.rect[:2])
+            self.surface.blit(pygame.transform.rotate(self.images['fort_missile'], self.game.fort.angle - 90),
+                              missile.rect[:2])
 
     def update_display(self):
         if self.display is None:
