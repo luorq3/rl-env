@@ -9,7 +9,7 @@ class ShipMissile(Missile):
     def __init__(self,
                  screen_size: Tuple[int, int],
                  rect: Rect,
-                 speed: int = 10):
+                 speed: int = 5):
         super(ShipMissile, self).__init__(screen_size, rect, speed)
 
     def update(self):
