@@ -28,7 +28,7 @@ class GameLogic:
         NOOP, UP, DOWN, LEFT, RIGHT, FIRE = 0, 1, 2, 3, 4, 5
 
     class Reward(IntEnum):
-        FIRE, HIT, BE_HIT, DESTROY, BE_DESTROY, VICTORY, DEFEATED = -1, 2, -2, 3, -3, 4, -4
+        FIRE, HIT, BE_HIT, VICTORY, DEFEATED = -1, 2, -2, 3, -3
 
     def _ship_init_position(self, nums=1):
         if nums == 1:
