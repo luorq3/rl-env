@@ -18,7 +18,7 @@ class FightEnvRGB(gym.Env):
                  screen_size: Tuple[int, int] = (896, 896)):
         super(FightEnvRGB, self).__init__()
         self.action_space = gym.spaces.Discrete(6)
-        self.observation_space = gym.spaces.Box(0, 255, [*screen_size, 3])
+        self.observation_space = gym.spaces.Box(0, 255, [*screen_size, 3], dtype=np.uint8)
 
         self.images = load_images(convert=False)
 
