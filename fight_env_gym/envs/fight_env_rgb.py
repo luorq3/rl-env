@@ -3,7 +3,6 @@ from typing import Optional, Tuple
 import gym
 import numpy as np
 import pygame
-from gym.core import ObsType, ActType
 from fight_env_gym.envs.renderer import FightRenderer
 from fight_env_gym.envs.game_logic import GameLogic
 
@@ -35,7 +34,7 @@ class FightEnvRGB(gym.Env):
         self._renderer.game = self._game
         return self._get_observation()
 
-    def step(self, action: ActType) -> Tuple[ObsType, float, bool, dict]:
+    def step(self, action):
         reward, alive = self._game.update_state(action)
         obs = self._get_observation()
 
