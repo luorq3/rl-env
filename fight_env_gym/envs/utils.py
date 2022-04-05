@@ -5,7 +5,6 @@ from typing import List, Dict, Any
 from pygame import image as pyg_image
 from pygame import Rect
 
-
 _BASE_DIR = Path(os.path.dirname(os.path.realpath(__file__))).parent
 
 SPRITES_PATH = str(_BASE_DIR / 'assets/images')
@@ -34,7 +33,7 @@ def pixel_collision(rect1: Rect,
         return False
 
     x1, y1 = rect.x - rect1.x, rect.y - rect1.y
-    x2, y2 = rect.y - rect2.y, rect.y - rect2.y
+    x2, y2 = rect.x - rect2.x, rect.y - rect2.y
 
     for x in range(rect.width):
         for y in range(rect.height):
@@ -46,6 +45,7 @@ def pixel_collision(rect1: Rect,
 def get_hitmask(image) -> List[List[bool]]:
     mask = []
     for x in range(image.get_width()):
+        mask.append([])
         for y in range(image.get_height()):
             mask[x].append(bool(image.get_at((x, y))[3]))
     return mask
@@ -73,6 +73,7 @@ def load_images(convert: bool = True) -> Dict[str, Any]:
                                 f"directory: {SPRITES_PATH}") from ex
     return images
 
+
 def load_image(filename, convert: bool = True) -> Any:
     try:
         image = _load_sprite(f"{filename}.png", convert=convert, alpha=True)
@@ -80,3 +81,12 @@ def load_image(filename, convert: bool = True) -> Any:
         raise FileNotFoundError("Can't find the sprites folder! No such file or"
                                 f"directory: {SPRITES_PATH}") from ex
     return image
+
+
+if __name__ == '__main__':
+    img1 = load_image('ship', False)
+    mask1 = get_hitmask(img1)
+    img2 = load_image('fort_missile', False)
+    mask2 = get_hitmask(img2)
+    c = pixel_collision(Rect(11, 0, 5, 8), Rect(0, 0, 40, 99), mask2, mask1)
+    print(c)
