@@ -51,11 +51,26 @@ def play_with_render(env: gym.Env):
             break
 
 
+def visualize_obs(env, greyscale: bool):
+    obs = env.reset()
+    obs = np.moveaxis(obs, source=1, destination=0)
+    if greyscale:
+        obs = obs.mean(axis=-1)
+    print(f"Obs shape: {obs.shape}")
+    img = Image.fromarray(obs)
+    img.show()
+    time.sleep(3)
+    img.close()
+
+
 if __name__ == "__main__":
     fight_env = fight_env_gym.make("Fight-rgb-v0")
 
     print(f"Action space: {fight_env.action_space}")
     print(f"Observation space: {fight_env.observation_space}")
+
+    visualize_obs(fight_env, greyscale=False)
+    visualize_obs(fight_env, greyscale=True)
 
     play_with_render(env=fight_env)
 
