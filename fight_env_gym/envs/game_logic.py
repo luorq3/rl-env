@@ -15,7 +15,7 @@ class GameLogic:
         self.ship = Ship(screen_size, Rect(*self._ship_init_position(), *ship_size))
         self.fort = Fort(screen_size, Rect(*self._fort_init_position(), *fort_size))
 
-        self.fort_fire_speed = 30  # TODO: The value is inversely proportional to the fire_speed, to be perfected
+        self.fort_fire_speed = 6  # TODO: The value is inversely proportional to the fire_speed, to be perfected
         self.fort_fire_clock = 0
 
         # hit mask
@@ -28,7 +28,8 @@ class GameLogic:
         NOOP, UP, DOWN, LEFT, RIGHT, FIRE = 0, 1, 2, 3, 4, 5
 
     class Reward(IntEnum):
-        FIRE, HIT, BE_HIT, VICTORY, DEFEATED = -1, 2, -2, 3, -3
+        # FIRE, HIT, BE_HIT, VICTORY, DEFEATED = 0, 1, -1, 3, -3
+        FIRE, HIT, BE_HIT = 0, 1, -1
 
     def _ship_init_position(self, nums=1):
         if nums == 1:
@@ -77,8 +78,8 @@ class GameLogic:
                 reward_list.append(self.Reward.HIT)
             if self.fort.hp == 0:
                 alive = False
-                reward_list.append(self.Reward.VICTORY)
-                reward += self.Reward.VICTORY
+                # reward_list.append(self.Reward.VICTORY)
+                # reward += self.Reward.VICTORY
                 break  # When victory, jump out of the loops to avoid calculating the wrong reward
         # Was Ship be hit
         for missile in self.fort.missile_group:
@@ -91,8 +92,8 @@ class GameLogic:
                 reward_list.append(self.Reward.BE_HIT)
             if self.ship.hp == 0:
                 alive = False
-                reward += self.Reward.DEFEATED
-                reward_list.append(self.Reward.DEFEATED)
+                # reward += self.Reward.DEFEATED
+                # reward_list.append(self.Reward.DEFEATED)
                 break  # When failed, jump out of the loops to avoid calculating the wrong reward
 
         print(f"update_state end, reward:{reward}")
