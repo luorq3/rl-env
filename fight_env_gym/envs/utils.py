@@ -15,6 +15,13 @@ ship_missile_size = (5, 8)
 fort_missile_size = (5, 8)
 
 
+def get_center_rect(rect):
+    """
+    surface 的坐标(0,0)位于右上角，在发射或瞄准时需要调整至surface中央
+    """
+    return [i + j / 2 for i, j in zip(rect[:2], rect[2:])]
+
+
 def pixel_collision2(rect1: Rect,
                      rect2: Rect):
     rect = rect1.clip(rect2)
