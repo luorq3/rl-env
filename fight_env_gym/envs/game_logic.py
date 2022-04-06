@@ -6,6 +6,13 @@ from fight_env_gym.envs.sprites import Fort
 from fight_env_gym.envs.utils import *
 
 
+def _get_ship_rect(rect):
+    """
+    surface 的坐标(0,0)位于右上角，在瞄准时需要调整至surface中央
+    """
+    return [i + j / 2 for i, j in zip(rect[:2], rect[2:])]
+
+
 class GameLogic:
 
     def __init__(self, images, screen_size: Tuple[int, int]):
@@ -60,7 +67,7 @@ class GameLogic:
 
         # machine fort fire logic
         if self.fort_fire_clock % self.fort_fire_speed == 0:
-            self.fort.update(*self.ship.rect[:2])
+            self.fort.update(*_get_ship_rect(self.ship.rect))
             self.fort.fire()
             self.fort_fire_clock = 0
 

@@ -69,8 +69,8 @@ if __name__ == "__main__":
     print(f"Action space: {fight_env.action_space}")
     print(f"Observation space: {fight_env.observation_space}")
 
-    visualize_obs(fight_env, greyscale=False)
-    visualize_obs(fight_env, greyscale=True)
+    # visualize_obs(fight_env, greyscale=False)
+    # visualize_obs(fight_env, greyscale=True)
 
     play_with_render(env=fight_env)
 

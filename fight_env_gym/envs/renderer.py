@@ -8,13 +8,6 @@ FILL_BACKGROUND_COLOR = (135, 206, 235)
 # FILL_BACKGROUND_COLOR = (0, 0, 0)
 
 
-def _get_render_rect(rect):
-    """
-    surface 的坐标(0,0)位于右上角，在渲染时需要调整至surface中央
-    """
-    return [i-j/2 for i, j in zip(rect[:2], rect[2:])]
-
-
 class FightRenderer:
 
     def __init__(self, images, screen_size: Tuple[int, int]):
@@ -49,19 +42,19 @@ class FightRenderer:
         else:
             self.surface.fill(FILL_BACKGROUND_COLOR)
 
-        self.surface.blit(self.images['ship'], _get_render_rect(self.game.ship.rect))
+        self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
         self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle),
-                          _get_render_rect(self.game.fort.rect))
+                          self.game.fort.rect[:2])
 
         self.game.ship.missile_group.update()
         self.game.fort.missile_group.update()
 
         for missile in self.game.ship.missile_group:
-            self.surface.blit(self.images['ship_missile'], _get_render_rect(missile.rect))
+            self.surface.blit(self.images['ship_missile'], missile.rect[:2])
 
         for missile in self.game.fort.missile_group:
             self.surface.blit(pygame.transform.rotate(self.images['fort_missile'], self.game.fort.angle),
-                              _get_render_rect(missile.rect))
+                              missile.rect[:2])
 
     def update_display(self):
         if self.display is None:
