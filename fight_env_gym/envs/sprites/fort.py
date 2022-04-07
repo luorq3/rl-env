@@ -27,17 +27,22 @@ class Fort(SpriteBase):
             self.radian)
         self.missile_group.add(missile)
 
-    # TODO: angle over 90 degree and less than -90
+    """
+    bug solved: Angle over -90 or 90 cause error.
+                Use atan2 instead of atan 
+    """
     def update(self, target_x, target_y, *args: Any, **kwargs: Any) -> None:
         offset_x = target_x - self.rect.x
         offset_y = target_y - self.rect.y
 
-        if offset_y != 0:
-            self.radian = math.atan(offset_x / offset_y)
-        else:
-            sign = 1
-            if offset_x < 0:
-                sign *= -1
-            self.radian = sign * math.pi / 2
+        # if offset_y != 0:
+        #     self.radian = math.atan(offset_x / offset_y)
+        # else:
+        #     sign = 1
+        #     if offset_x < 0:
+        #         sign *= -1
+        #     self.radian = sign * math.pi / 2
+
+        self.radian = math.atan2(offset_x, offset_y)
 
         self.angle = self.radian * 180 / math.pi
