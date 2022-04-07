@@ -13,7 +13,7 @@ class GameLogic:
         self._screen_height = screen_size[1]
 
         self.ship = Ship(screen_size, Rect(*self._ship_init_position(), *ship_size))
-        self.fort = Fort(screen_size, Rect(*self._fort_init_position(), *fort_size))
+        self.fort = Fort(screen_size, Rect(*self._fort_init_position()[0], *fort_size))
 
         self.fort_fire_speed = 6  # TODO: The value is inversely proportional to the fire_speed, to be perfected
         self.fort_fire_clock = 0
@@ -38,12 +38,19 @@ class GameLogic:
             # TODO: multi ship position initialization
             return 0, 0
 
+    """
+    炮台均匀分布在防守方陆地上
+    """
     def _fort_init_position(self, nums=1):
-        if nums == 1:
-            return self._screen_width // 2, 100
-        else:
-            # TODO: multi ship position initialization
-            return 0, 0
+        positions = []
+        x = fort_beach_rect.x
+        gap = fort_beach_rect.width / (nums + 1)
+        for i in range(nums):
+            x += gap
+            y = get_y_by_x(x)
+            positions.append((x, y))
+
+        return positions
 
     def update_state(self, action: int):
         alive = True

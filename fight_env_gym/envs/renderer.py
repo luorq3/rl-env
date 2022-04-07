@@ -42,6 +42,8 @@ class FightRenderer:
         else:
             self.surface.fill(FILL_BACKGROUND_COLOR)
 
+        pygame.draw.circle(self.surface, (233, 150, 122), (self._screen_width / 2, 0), 224)
+
         self.surface.blit(self.images['ship'], self.game.ship.rect[:2])
         self.surface.blit(pygame.transform.rotate(self.images['fort'], self.game.fort.angle),
                           self.game.fort.rect[:2])

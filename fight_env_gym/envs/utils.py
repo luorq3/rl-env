@@ -1,3 +1,4 @@
+import math
 import os
 from pathlib import Path
 from typing import List, Dict, Any
@@ -13,6 +14,20 @@ ship_size = (40, 99)
 fort_size = (20, 20)
 ship_missile_size = (5, 8)
 fort_missile_size = (5, 8)
+
+# 防守方的陆地为一个半圆，半径为224
+beach_rect = (224, 0, 448, 224)
+# 放置炮台的半圆，处于防守方陆地内，比陆地略小的同心圆，半径为210
+fort_beach_rect = Rect(238, 0, 420, 210)
+
+
+"""
+(x - 448)^2 + y^2 = 210^2
+from x to y
+"""
+def get_y_by_x(x):
+    y = math.sqrt(210**2 - (x - 448)**2)
+    return int(y)
 
 
 def get_center_rect(rect):
