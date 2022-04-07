@@ -1,4 +1,3 @@
-import math
 from typing import Tuple
 
 import pygame
@@ -23,7 +22,7 @@ class Fort(SpriteBase):
     def fire(self):
         missile = FortMissile(
             self.screen_size,
-            Rect(*get_center_rect(self.rect), *fort_missile_size),
+            Rect(*self.get_center_coord(), *fort_missile_size),
             self.radian)
         self.missile_group.add(missile)
 

@@ -18,11 +18,8 @@ class Ship(SpriteBase, Movable):
         self.hp = hp
         self.missile_group = pygame.sprite.Group()
 
-    def update(self, *args: Any, **kwargs: Any) -> None:
-        pass
-
     def fire(self):
-        missile = ShipMissile(self.screen_size, Rect(*get_center_rect(self.rect), *ship_missile_size))
+        missile = ShipMissile(self.screen_size, Rect(*self.get_center_coord(), *ship_missile_size))
         self.missile_group.add(missile)
 
 
